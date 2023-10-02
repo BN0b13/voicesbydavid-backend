@@ -1,0 +1,20 @@
+version: '3.5'
+
+services:
+  postgres:
+    image: postgres:14.2-alpine
+    container_name: david
+    environment:
+      POSTGRES_USER: "${PG_USERNAME}"
+      POSTGRES_PASSWORD: "${PG_PASSWORD}"
+      POSTGRES_DB: "${PG_DATABASE_NAME}"
+    restart: unless-stopped
+    volumes:
+       - david:/var/lib/postgresql/data/
+    ports:
+      - "5432:5432"
+    env_file:
+      - "./.env"
+
+volumes:
+  david:
