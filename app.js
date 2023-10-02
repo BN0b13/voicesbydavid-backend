@@ -33,7 +33,7 @@ app.use(
 
 //Prod
 // app.use(cors({
-//   origin: ['https://cosmicstrains.com', 'https://www.cosmicstrains.com', 'https://admin.cosmicstrains.com']
+//   origin: ['https://voicesbydavid.com', 'https://www.voicesbydavid.com', 'https://admin.voicesbydavid.com']
 // }));
 
 app.use(cors({ origin: '*' }));
