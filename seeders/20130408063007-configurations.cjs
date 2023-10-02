@@ -7,19 +7,19 @@ module.exports = {
     await queryInterface.bulkInsert(table, [{
       themeId: 1,
       name: 'public',
-      url: 'CosmicStrains.com',
+      url: 'voicesbydavid.com',
       company: JSON.stringify({
-        companyName: 'Cosmic Strains',
+        companyName: 'Voices By David',
         companyPhoneOn: false,
         companyPhone: null,
         companyPhoneExt: null,
         companyEmailOn: false,
-        companyEmail: 'sales@cosmicstrains.com',
-        companyShippingEmail: 'sales@cosmicstrains.com',
+        companyEmail: 'davidilchertva@gmail.com',
+        companyShippingEmail: 'davidilchertva@gmail.com',
         companyShippingAddressOn: false,
         companyShippingAddress: {
-          firstName: 'Cosmic',
-          lastName: 'Strains',
+          firstName: 'David',
+          lastName: 'Ilchert',
           addressOne: '3400 Cottage Way',
           addressTwo: 'Ste G2 #18240',
           city: 'Sacramento',
@@ -27,8 +27,8 @@ module.exports = {
           zipCode: 95825
         },
         companyBillingAddress: {
-          firstName: 'Cosmic',
-          lastName: 'Strains',
+          firstName: 'David',
+          lastName: 'Ilchert',
           addressOne: '3400 Cottage Way',
           addressTwo: 'Ste G2 #18240',
           city: 'Sacramento',
@@ -41,7 +41,7 @@ module.exports = {
           customerServiceOn: false,
           customerServicePhone: null,
           customerServicePhoneExt: null,
-          customerServiceEmail: 'sales@cosmicstrains.com'
+          customerServiceEmail: 'davidilchertva@gmail.com'
         },
         deliveryInsurance: {
           deliveryInsuranceOn: true,
@@ -60,19 +60,19 @@ module.exports = {
     {
       themeId: 1,
       name: 'admin',
-      url: 'admin.CosmicStrains.com',
+      url: 'admin.voicesbydavid.com',
       company: JSON.stringify({
-        companyName: 'Cosmic Strains',
+        companyName: 'Voices By David',
         companyPhoneOn: false,
         companyPhone: null,
         companyPhoneExt: null,
         companyEmailOn: false,
-        companyEmail: 'sales@cosmicstrains.com',
-        companyShippingEmail: 'sales@cosmicstrains.com',
+        companyEmail: 'davidilchertva@gmail.com',
+        companyShippingEmail: 'davidilchertva@gmail.com',
         companyShippingAddressOn: false,
         companyShippingAddress: {
-          firstName: 'Cosmic',
-          lastName: 'Strains',
+          firstName: 'David',
+          lastName: 'Ilchert',
           addressOne: '3400 Cottage Way',
           addressTwo: 'Ste G2 #18240',
           city: 'Sacramento',
@@ -80,8 +80,8 @@ module.exports = {
           zipCode: 95825
         },
         companyBillingAddress: {
-          firstName: 'Cosmic',
-          lastName: 'Strains',
+          firstName: 'David',
+          lastName: 'Ilchert',
           addressOne: '3400 Cottage Way',
           addressTwo: 'Ste G2 #18240',
           city: 'Sacramento',

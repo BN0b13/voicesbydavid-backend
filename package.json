@@ -6,9 +6,9 @@
   "type": "module",
   "scripts": {
     "start": "npm run migrate && nodemon app.js",
-    "up": "docker-compose -f ./docker-compose.yml -p cosmic_strains up -d",
-    "down": "docker-compose -f ./docker-compose.yml -p cosmic_strains down",
-    "destroy": "docker-compose -f ./docker-compose.yml -p cosmic_strains down -v --remove-orphans",
+    "up": "docker-compose -f ./docker-compose.yml -p david up -d",
+    "down": "docker-compose -f ./docker-compose.yml -p david down",
+    "destroy": "docker-compose -f ./docker-compose.yml -p david down -v --remove-orphans",
     "migrate": "sequelize-cli db:migrate",
     "seed": "npx sequelize-cli db:seed:all"
   },

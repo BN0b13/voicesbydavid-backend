@@ -25,8 +25,8 @@ npx sequelize-cli seed:generate --name createRoles
 npx sequelize-cli db:seed:all
 
 # Backing up Postgres DB
-docker exec -t cosmic_strains pg_dumpall -c -U admin > dump_`date +%d-%m-%Y"_"%H_%M_%S`.sql
+docker exec -t david pg_dumpall -c -U admin > dump_`date +%d-%m-%Y"_"%H_%M_%S`.sql
 
 # Create Docker Volume
 
-docker volume create cosmic_strains
+docker volume create david

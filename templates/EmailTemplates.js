@@ -48,13 +48,13 @@ export default class EmailTemplates {
             sellerEmail: companySupportEmail,
             emailSubject: `${companyName} Password Reset`,
             emailBody: `Hello! The password reset process has been initiated on your account. Please click the link below to reset your password. If you did not initiate this process, please disregard this email and continue on using your normal password. 
-            https://www.cosmicstrains.com/password-reset/${token}`,
+            https://www.voicesbydavid.com/password-reset/${token}`,
             html: `
                 <div style='text-align:center;'>
                     <h1>${companyName}</h1>
                     <p>Hello! The password reset process has been initiated on your account. Please click the link below to reset your password. If you did not initiate this process, please disregard this email and continue using your normal password.</p>
                     <button style='border-radius:5px;'>
-                        <a href='https://www.cosmicstrains.com/password-reset/${token}' style='text-decoration:none;border-radius:5px;padding:5px;'>
+                        <a href='https://www.voicesbydavid.com/password-reset/${token}' style='text-decoration:none;border-radius:5px;padding:5px;'>
                             Reset Password
                         </a>
                     </button>
@@ -68,13 +68,13 @@ export default class EmailTemplates {
             sellerEmail: companySupportEmail,
             emailSubject: `${companyName} Email Verification`,
             emailBody: `Hello and welcome! Please click on the link below to verify your ${companyName} account. Thank you for signing up with us and we hope to see you soon!  
-            https://www.cosmicstrains.com/verify-email/${token}`,
+            https://www.voicesbydavid.com/verify-email/${token}`,
             html: `
                 <div style='text-align:center;'>
                     <h1>${companyName}</h1>
                     <p>Hello and welcome! Please click on the link below to verify your ${companyName} account. Thank you for signing up with us and we hope to see you soon!</p>
                     <button style='border-radius:5px;'>
-                        <a href='https://www.cosmicstrains.com/verify-email/${token}' style='text-decoration:none;border-radius:5px;padding:5px;'>
+                        <a href='https://www.voicesbydavid.com/verify-email/${token}' style='text-decoration:none;border-radius:5px;padding:5px;'>
                             Verify Email
                         </a>
                     </button>

@@ -49,7 +49,7 @@ class OrderRepository {
     async getOrdersByProductId(productId) {
         try {
             const res = await sequelize.query(`select *
-            from cosmic."Orders"
+            from david."Orders"
             where products @> '[{"productId": ${productId}}]'::jsonb`);
             return res;
         } catch (err) {

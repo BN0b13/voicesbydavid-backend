@@ -1,6 +1,6 @@
-export const companyName = 'Cosmic Strains';
-export const companyEmail = 'sales@cosmicstrains.com';
-export const companySupportEmail = 'support@cosmicstrains.com';
+export const companyName = 'Voices By David';
+export const companyEmail = 'davidilchertva@gmail.com';
+export const companySupportEmail = 'davidilchertva@gmail.com';
 
 export const deliveryInsurance = 800;
 
