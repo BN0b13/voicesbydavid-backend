@@ -12,7 +12,10 @@ import { sequelize } from '../db.js';
     }
   }
   Message.init({
-    userId: DataTypes.INTEGER,
+    firstName: DataTypes.STRING,
+    lastName: DataTypes.STRING,
+    phone: DataTypes.STRING,
+    email: DataTypes.STRING,
     message: DataTypes.TEXT,
     status: DataTypes.STRING,
     replied: DataTypes.BOOLEAN

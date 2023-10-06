@@ -9,8 +9,6 @@ const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../config/config.json')[env];
 const db = {};
 
-const Cart = require('./Cart.js');
-const Order = require('./Order.js');
 const Role = require('./Role.js');
 const User = require('./User.js');
 
@@ -38,30 +36,6 @@ fs
 
 console.log('DB var in index', db);
 
-Order.belongsTo(User, {
-  through: User,
-  foreignKey:{
-      allowNull: false, 
-      name:'userId'
-  }
-});
-
-
-User.hasOne(Cart, {
-  through: Cart,
-  foreignKey:{
-      allowNull: false, 
-      name:'userId'
-  }
-});
-
-User.hasMany(Order, {
-  as: Order,
-  foreignKey:{
-      allowNull: false, 
-      name:'userId'
-  }
-});
 
 User.hasOne(Role, {
   through: Role,

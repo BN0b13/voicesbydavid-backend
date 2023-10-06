@@ -5,16 +5,15 @@ class MessageRepository {
 
     // CREATE
 
-    async create({ userId, message }) {
-        const params = {
-            userId,
-            message,
+    async create(params) {
+        const data = {
+            ...params,
             status: 'new',
             replied: false
         };
 
         try {
-            const res = await Message.create(params);
+            const res = await Message.create(data);
             return res;
         } catch (err) {
             console.log(err);
@@ -31,6 +30,41 @@ class MessageRepository {
         } catch (err) {
             console.log('Get Messages Error: ', err);
             throw Error('There was an error getting the messages');
+        }
+    }
+
+    async getMessageById(id) {
+        try {
+            const res = await Message.findAll(
+                {
+                    where: {
+                        id: id
+                    }
+                }
+            );
+            return res;
+        } catch (err) {
+            console.log('Get Message by id Error: ', err);
+            throw Error('There was an error getting the message by id');
+        }
+    }
+
+    // UPDATE 
+
+    async updateMessage(id, data) {
+        try {
+            const res = await Message.update(
+                data,
+                {
+                    where: {
+                                id: id
+                            }
+                }
+            );
+            return res;
+        } catch (err) {
+            console.log('Update Message Error: ', err);
+            throw Error('There was an error updating the message');
         }
     }
 }

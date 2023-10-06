@@ -1,40 +1,13 @@
 import AuthManagement from '../services/AuthManagement.js';
 import UserService from '../services/UserService.js';
 
-import { Cart, Order, Role, User } from '../models/Associations.js';
+import { Role, User } from '../models/Associations.js';
 
 const authManagement = new AuthManagement();
 const userService = new UserService();
 
 class UserRepository {
     // READ
-
-    async login({ email, password }) {
-        try {
-            const getUser = await this.getSingleUserByEmail(email);
-
-            if(!getUser) {
-                throw Error('Email does not exist');
-            }
-
-            const verifyPassword = await userService.verifyPassword(password, getUser.password);
-
-            if(!verifyPassword) {
-                throw Error('Password was not correct');
-            }
-
-            const token = await authManagement.createToken({ id: getUser.id });
-
-            return {
-                status: 200,
-                token,
-                email: getUser.email
-            };
-        } catch (err) {
-            console.log('Login error: ', err);
-            throw Error('There was an error logging in');
-        }
-    }
 
     async adminLogin({ email, password }) {
         try {
@@ -77,15 +50,7 @@ class UserRepository {
         const user = await User.findOne({
             where: {
                 id
-            },
-            include: [
-                { 
-                    model: Cart
-                },
-                { 
-                    model: Order
-                }
-            ]
+            }
         });
 
         const data = {
@@ -93,35 +58,13 @@ class UserRepository {
             firstName: user.firstName,
             lastName: user.lastName,
             phone: user.phone,
-            billingAddress: user.billingAddress,
-            shippingAddress: user.shippingAddress,
-            subscriptions: user.subscriptions,
+            address: user.address,
             emailVerified: user.emailVerified,
-            favorites: user.favorites,
-            subscriptions: user.subscriptions,
             themeId: user.themeId,
             themeInverted: user.themeInverted,
-            cart: user.Cart,
-            orders: user.Orders,
         }
 
         return data;
-    }
-
-    async getByEmail(email) {
-        return await User.findAll({
-            where: {
-                email
-            }
-        });
-    }
-
-    async getSingleUserByEmail(email) {
-        return await User.findOne({
-            where: {
-                email
-            }
-        });
     }
 
     async getByPK(id) {
@@ -132,12 +75,6 @@ class UserRepository {
         try {
             const res = await User.findAndCountAll({
                 include: [
-                    { 
-                        model: Cart
-                    },
-                    { 
-                        model: Order
-                    },
                     { 
                         model: Role
                     }
@@ -159,12 +96,6 @@ class UserRepository {
                     },
                     include: [
                         { 
-                            model: Cart
-                        },
-                        { 
-                            model: Order
-                        },
-                        { 
                             model: Role
                         }
                     ]
@@ -177,56 +108,20 @@ class UserRepository {
         }
     }
 
+    async getSingleUserByEmail(email) {
+        return await User.findOne({
+            where: {
+                email
+            }
+        });
+    }
+
     async getAdmin() {
         return await User.findAndCountAll({
             where: {
                 roleId: 2
             },
             include: [
-                { 
-                    model: Cart
-                },
-                { 
-                    model: Order
-                },
-                { 
-                    model: Role
-                }
-            ]
-        });
-    }
-
-    async getEmployees() {
-        return await User.findAndCountAll({
-            where: {
-                roleId: 3
-            },
-            include: [
-                { 
-                    model: Cart
-                },
-                { 
-                    model: Order
-                },
-                { 
-                    model: Role
-                }
-            ]
-        });
-    }
-
-    async getCustomers() {
-        return await User.findAndCountAll({
-            where: {
-                roleId: 4
-            },
-            include: [
-                { 
-                    model: Cart
-                },
-                { 
-                    model: Order
-                },
                 { 
                     model: Role
                 }
@@ -268,25 +163,6 @@ class UserRepository {
         } catch (err) {
             console.log('Delete User Error: ', err);
             throw Error('There was an error deleting the user');
-        }
-    }
-
-    async deleteCustomer(id) {
-        try {
-            const res = await User.update(
-                {
-                    email: 'deleted'
-                },
-                {
-                    where: {
-                                id: id
-                            }
-                }
-            );
-            return res;
-        } catch (err) {
-            console.log('DELETE Customer Error: ', err);
-            throw Error('There was an error deleting the customer');
         }
     }
 }

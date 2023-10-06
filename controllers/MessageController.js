@@ -8,22 +8,38 @@ class MessageController {
 
     async create(req, res) {
         try {
-        const {
-            userId,
-            message
-        } = req.body;
+            console.log('CREATE Message initiated...');
 
-        const params = {
-            userId,
-            message
-        };
+            const {
+                firstName = null,
+                lastName = null,
+                phone = null,
+                email = null,
+                message = null
+            } = req.body;
 
-        const data = await messageRepository.create(params);
+            const params = {
+                firstName,
+                lastName,
+                phone,
+                email,
+                message
+            };
 
-        res.send({
-            message: 'Message Creation Result',
-            result: data
-        });
+            console.log('PARAMS: ', params);
+
+            Object.values(params).forEach(param => {
+                if(param === null) {
+                    throw Error(`Message missing ${params[param]} Param`);
+                }
+            });
+
+            const data = await messageRepository.create(params);
+
+            res.send({
+                message: 'Message Creation Result',
+                result: data
+            });
         } catch (err) {
             res.send({
                 err,
@@ -36,6 +52,33 @@ class MessageController {
     
     async getMessages(req, res) {
         const data = await messageRepository.getMessages();
+        res.send(data);
+    }
+    
+    async getMessageById(req, res) {
+        const { id } = req.params;
+        const data = await messageRepository.getMessageById(id);
+        res.send(data);
+    }
+
+    // UPDATE
+
+    async updateMessage(req, res) {
+        console.log('UPDATE message hit: ', req.body);
+        const {
+            id,
+            status = null,
+            replied = null
+        } = req.body;
+
+        const params = {
+            status,
+            replied
+        };
+
+        Object.keys(params).forEach(param => params[param] == null && delete params[param]);
+
+        const data = await messageRepository.updateMessage(id, params);
         res.send(data);
     }
 

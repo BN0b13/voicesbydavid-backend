@@ -17,8 +17,7 @@ class UserController {
             firstName = null,
             lastName = null,
             phone = null,
-            billingAddress = null,
-            shippingAddress = null
+            address = null
         } = req.body;
 
         const params = {
@@ -27,8 +26,7 @@ class UserController {
             firstName,
             lastName,
             phone,
-            billingAddress,
-            shippingAddress
+            address
         };
 
         Object.values(params).forEach(param => {
@@ -44,127 +42,6 @@ class UserController {
             res.send({
                 err,
                 message: 'There was an error creating Admin'
-            });
-        }
-    }
-
-    async createEmployee(req, res) {
-        try {
-        const { 
-            email = null,
-            password = null,
-            firstName = null,
-            lastName = null,
-            phone = null,
-            billingAddress = null,
-            shippingAddress = null
-        } = req.body;
-
-        const params = {
-            email: email.toLowerCase(),
-            password,
-            firstName,
-            lastName,
-            phone,
-            billingAddress,
-            shippingAddress
-        };
-
-        Object.values(params).forEach(param => {
-            if(param === null) {
-                throw Error(`Missing ${params[param]} Param`);
-            }
-        });
-
-        const data = await userService.createEmployeeTransaction(params);
-
-        res.send(data);
-        } catch (err) {
-            res.send({
-                err,
-                message: 'There was an error creating Employee'
-            });
-        }
-    }
-
-    async createCustomer(req, res) {
-        try {
-        const { 
-            email = null,
-            password = null,
-            firstName = null,
-            lastName = null,
-            phone = null,
-            billingAddress = null,
-            shippingAddress = null,
-            eula = null
-        } = req.body;
-
-        const params = {
-            email: email.toLowerCase(),
-            password,
-            firstName,
-            lastName,
-            phone,
-            billingAddress,
-            shippingAddress,
-            eula
-        };
-
-        Object.values(params).forEach(param => {
-            if(param === null) {
-                throw Error(`Missing ${params[param]} Param`);
-            }
-        });
-
-        const data = await userService.createCustomer(params);
-
-        res.send(data);
-        } catch (err) {
-            res.send({
-                err,
-                message: 'There was an error creating user'
-            });
-        }
-    }
-
-    async adminCreateCustomer(req, res) {
-        try {
-        const { 
-            email = null,
-            password = null,
-            firstName = null,
-            lastName = null,
-            phone = null,
-            billingAddress = null,
-            shippingAddress = null,
-            eula = null
-        } = req.body;
-
-        const params = {
-            email: email.toLowerCase(),
-            password,
-            firstName,
-            lastName,
-            phone,
-            billingAddress,
-            shippingAddress,
-            eula
-        };
-
-        Object.values(params).forEach(param => {
-            if(param === null) {
-                throw Error(`Missing ${params[param]} Param`);
-            }
-        });
-
-        const data = await userService.adminCreateCustomer(params);
-
-        res.send(data);
-        } catch (err) {
-            res.send({
-                err,
-                message: 'There was an error creating user'
             });
         }
     }
@@ -268,41 +145,8 @@ class UserController {
 
     // READ
 
-    async login(req, res) {
-        try {
-            const {
-                email = null, 
-                password = null
-            } = req.body;
-
-            if(email === 'deleted') {
-                throw Error(`Customer has been deleted, unable to log in.`);
-            }
-    
-            const params = {
-                email: email.toLowerCase(), 
-                password
-            };
-    
-            Object.values(params).forEach(param => {
-                if(param === null) {
-                    throw Error(`Missing ${params[param]} Param`);
-                }
-            });
-
-            const data = await userRepository.login(params);
-
-            res.send(data);
-        } catch (err) {
-            console.log(err);
-            res.send({
-                err,
-                message: 'There was an error logging in'
-            });
-        }
-    }
-
     async adminLogin(req, res) {
+        console.log('ADMIN LOGIN HIT');
         try {
             const {
                 email = null, 
@@ -333,16 +177,6 @@ class UserController {
 
     async getAdmin(req, res) {
         const data = await userRepository.getAdmin();
-        res.send(data);
-    }
-
-    async getEmployees(req, res) {
-        const data = await userRepository.getEmployees();
-        res.send(data);
-    }
-
-    async getCustomers(req, res) {
-        const data = await userRepository.getCustomers();
         res.send(data);
     }
 
@@ -397,9 +231,7 @@ class UserController {
             firstName = null,
             lastName = null,
             phone = null,
-            billingAddress = null,
-            shippingAddress = null,
-            subscriptions = null
+            address = null
         } = req.body;
 
         const params = {
@@ -407,9 +239,7 @@ class UserController {
             firstName,
             lastName,
             phone,
-            billingAddress,
-            shippingAddress,
-            subscriptions
+            address
         };
 
         Object.keys(params).forEach(param => params[param] == null && delete params[param]);

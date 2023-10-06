@@ -1,4 +1,3 @@
-import Page from '../models/Page.js';
 import WelcomeImage from '../models/WelcomeImage.js';
 
 class WelcomeRepository {
@@ -8,22 +7,6 @@ class WelcomeRepository {
     async getWelcomeImages() {
         try {
             const res = await WelcomeImage.findAndCountAll();
-            return res;
-        } catch (err) {
-            console.log('GET Welcome Images Error: ', err);
-            throw Error('There was an error getting Welcome Images');
-        }
-    }
-
-    async getWelcomeContent() {
-        try {
-            const res = await Page.findAndCountAll(
-                {
-                    where: {
-                        type: "welcome"
-                    }
-                }
-            );
             return res;
         } catch (err) {
             console.log('GET Welcome Images Error: ', err);

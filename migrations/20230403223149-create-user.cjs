@@ -16,10 +16,6 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
-      emailOriginal: {
-        allowNull: false,
-        type: Sequelize.STRING
-      },
       password: {
         allowNull: false,
         type: Sequelize.STRING
@@ -36,17 +32,8 @@ module.exports = {
       phone: {
         type: Sequelize.STRING
       },
-      billingAddress: {
+      address: {
         type: Sequelize.JSONB
-      },
-      shippingAddress: {
-        type: Sequelize.JSONB
-      },
-      favorites: {
-        type: Sequelize.ARRAY(Sequelize.INTEGER)
-      },
-      subscriptions: {
-        type: Sequelize.ARRAY(Sequelize.INTEGER)
       },
       emailVerified: {
         type: Sequelize.BOOLEAN
@@ -57,20 +44,11 @@ module.exports = {
       passwordToken: {
         type: Sequelize.STRING
       },
-      credit: {
-        type: Sequelize.INTEGER
-      },
       themeId: {
         type: Sequelize.INTEGER
       },
       themeInverted: {
         type: Sequelize.BOOLEAN
-      },
-      eula: {
-        type: Sequelize.BOOLEAN
-      },
-      eulaVersion: {
-        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,

@@ -14,24 +14,17 @@ class User extends Model {
 }
 User.init({
   email: DataTypes.STRING,
-  emailOriginal: DataTypes.STRING,
   password: DataTypes.STRING,
   roleId: DataTypes.INTEGER,
   firstName: DataTypes.STRING,
   lastName: DataTypes.STRING,
   phone: DataTypes.STRING,
-  billingAddress: DataTypes.JSONB,
-  shippingAddress: DataTypes.JSONB,
-  favorites: DataTypes.ARRAY(DataTypes.INTEGER),
-  subscriptions: DataTypes.ARRAY(DataTypes.INTEGER),
+  address: DataTypes.JSONB,
   emailVerified: DataTypes.BOOLEAN,
   emailToken: DataTypes.STRING,
   passwordToken: DataTypes.STRING,
-  credit: DataTypes.INTEGER,
   themeId: DataTypes.INTEGER,
-  themeInverted: DataTypes.BOOLEAN,
-  eula: DataTypes.BOOLEAN,
-  eulaVersion: DataTypes.STRING
+  themeInverted: DataTypes.BOOLEAN
 }, {
   sequelize,
   schema: process.env.PG_SCHEMA_NAME,
