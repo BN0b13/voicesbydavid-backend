@@ -6,12 +6,16 @@ import { HandleErrors } from '../middleware/errorHandler.js';
 
 import ConfigurationController from '../controllers/ConfigurationController.js';
 import MessageController from '../controllers/MessageController.js';
+import ReelController from '../controllers/ReelController.js';
+import TestimonialController from '../controllers/TestimonialController.js';
 import ThemeController from '../controllers/ThemeController.js';
 import VisitController from '../controllers/VisitController.js';
 import WelcomeController from '../controllers/WelcomeController.js';
 
 const configurationController = new ConfigurationController();
 const messageController = new MessageController();
+const reelController = new ReelController();
+const testimonialController = new TestimonialController();
 const themeController = new ThemeController();
 const visitController = new VisitController();
 const welcomeController = new WelcomeController();
@@ -30,6 +34,16 @@ router.get('/configuration', HandleErrors(configurationController.getPublicConfi
 // Contact
 
 router.post('/contact', HandleErrors(messageController.create));
+
+// Reels
+
+router.get('/reels', HandleErrors(reelController.getReels));
+router.get('/reels/video', HandleErrors(reelController.getVideoReels));
+router.get('/reels/video/:id', HandleErrors(reelController.streamVideoById));
+
+// Testimonials
+
+router.get('/testimonials', HandleErrors(testimonialController.getTestimonials));
 
 // Themes
 

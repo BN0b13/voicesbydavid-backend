@@ -1,5 +1,6 @@
 import Configuration from './Configuration.js';
 import Message from './Message.js';
+import Reel from './Reel.js';
 import Role from './Role.js';
 import Theme from './Theme.js';
 import User from './User.js';
@@ -25,6 +26,7 @@ User.hasOne(Role, {
 export {
     Configuration,
     Message,
+    Reel,
     Role,
     Theme,
     User,

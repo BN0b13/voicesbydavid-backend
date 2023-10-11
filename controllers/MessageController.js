@@ -8,14 +8,13 @@ class MessageController {
 
     async create(req, res) {
         try {
-            console.log('CREATE Message initiated...');
-
             const {
                 firstName = null,
                 lastName = null,
                 phone = null,
                 email = null,
-                message = null
+                message = null,
+                reCaptcha = null
             } = req.body;
 
             const params = {
@@ -26,20 +25,15 @@ class MessageController {
                 message
             };
 
-            console.log('PARAMS: ', params);
-
             Object.values(params).forEach(param => {
                 if(param === null) {
                     throw Error(`Message missing ${params[param]} Param`);
                 }
             });
 
-            const data = await messageRepository.create(params);
+            const data = await messageRepository.create(reCaptcha, params);
 
-            res.send({
-                message: 'Message Creation Result',
-                result: data
-            });
+            res.send(data);
         } catch (err) {
             res.send({
                 err,
@@ -68,12 +62,14 @@ class MessageController {
         const {
             id,
             status = null,
-            replied = null
+            replied = null,
+            deleted = null
         } = req.body;
 
         const params = {
             status,
-            replied
+            replied,
+            deleted
         };
 
         Object.keys(params).forEach(param => params[param] == null && delete params[param]);

@@ -18,7 +18,8 @@ import { sequelize } from '../db.js';
     email: DataTypes.STRING,
     message: DataTypes.TEXT,
     status: DataTypes.STRING,
-    replied: DataTypes.BOOLEAN
+    replied: DataTypes.BOOLEAN,
+    deleted: DataTypes.BOOLEAN
   }, {
     sequelize,
     schema: process.env.PG_SCHEMA_NAME,

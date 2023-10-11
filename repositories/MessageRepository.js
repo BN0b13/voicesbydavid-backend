@@ -1,20 +1,36 @@
 import Message from '../models/Message.js';
 
+import ReCaptchaCheck from '../services/ReCaptcha.js';
+
 class MessageRepository {
 
 
     // CREATE
 
-    async create(params) {
+    async create(reCaptcha, params) {
+        const checkReCaptcha = await ReCaptchaCheck(reCaptcha);
+        
+        if(checkReCaptcha !== 200) {
+            return {
+                status: 403,
+                message: 'reCAPTCHA validation failed'
+            }
+        }
+
         const data = {
             ...params,
             status: 'new',
-            replied: false
+            replied: false,
+            deleted: false
         };
 
         try {
             const res = await Message.create(data);
-            return res;
+            return {
+                status: 201,
+                message: 'Message created.',
+                response: res
+            };
         } catch (err) {
             console.log(err);
             throw Error('There was an error creating the message');

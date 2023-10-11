@@ -5,35 +5,44 @@ module.exports = {
     await queryInterface.createSchema(process.env.PG_SCHEMA_NAME, {
       ifNotExists: true
     });
-    await queryInterface.createTable('Messages', {
+    await queryInterface.createTable('Reels', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      firstName: {
+      position: {
+        type: Sequelize.INTEGER
+      },
+      reelDate: {
         type: Sequelize.STRING
       },
-      lastName: {
+      reelType: {
         type: Sequelize.STRING
       },
-      phone: {
+      title: {
         type: Sequelize.STRING
       },
-      email: {
+      description: {
         type: Sequelize.STRING
       },
-      message: {
-        type: Sequelize.STRING(10000)
-      },
-      status: {
+      company: {
         type: Sequelize.STRING
       },
-      replied: {
-        type: Sequelize.BOOLEAN
+      companyUrl: {
+        type: Sequelize.STRING
       },
-      deleted: {
+      url: {
+        type: Sequelize.STRING
+      },
+      filename: {
+        type: Sequelize.STRING
+      },
+      path: {
+        type: Sequelize.STRING
+      },
+      active: {
         type: Sequelize.BOOLEAN
       },
       createdAt: {
@@ -47,6 +56,6 @@ module.exports = {
     }, { schema: process.env.PG_SCHEMA_NAME });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Messages');
+    await queryInterface.dropTable('Reels');
   }
 };
