@@ -93,10 +93,12 @@ router.post('/admin', AdminTokenVerifier, HandleErrors(userController.createAdmi
 router.get('/admin', AdminTokenVerifier, HandleErrors(userController.getAdmin));
 
 router.get('/users', AdminTokenVerifier, HandleErrors(userController.getUsers));
+router.get('/user', AdminTokenVerifier, HandleErrors(userController.getUser));
 router.get('/user/:id', AdminTokenVerifier, HandleErrors(userController.getUserById));
 
 // TODO make admin patch function
 router.patch('/users', AdminTokenVerifier, HandleErrors(userController.updateUser));
+router.patch('/user/update-password', AdminTokenVerifier, HandleErrors(userController.updateAccountPassword));
 
 router.delete('/users', AdminTokenVerifier, HandleErrors(userController.deleteUser));
 

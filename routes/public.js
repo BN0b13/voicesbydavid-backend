@@ -53,13 +53,11 @@ router.get('/theme', HandleErrors(themeController.getTheme));
 
 // Users
 
+router.get('/user/reset-password-token/verify/:token', HandleErrors(userController.verifyUserResetPasswordToken));
+
 router.post('/user/reset-password', HandleErrors(userController.initiatePasswordReset));
 
 router.post('/user/reset-password/token', HandleErrors(userController.completePasswordReset));
-
-router.get('/user/reset-password-token/verify/:token', HandleErrors(userController.verifyUserResetPasswordToken));
-
-router.patch('/user/update-password', TokenVerifier, HandleErrors(userController.updateAccountPassword));
 
 // Visits
 
