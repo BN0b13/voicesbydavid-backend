@@ -9,6 +9,7 @@ import MessageController from '../controllers/MessageController.js';
 import ReelController from '../controllers/ReelController.js';
 import TestimonialController from '../controllers/TestimonialController.js';
 import ThemeController from '../controllers/ThemeController.js';
+import UserController from '../controllers/UserController.js';
 import VisitController from '../controllers/VisitController.js';
 import WelcomeController from '../controllers/WelcomeController.js';
 
@@ -17,6 +18,7 @@ const messageController = new MessageController();
 const reelController = new ReelController();
 const testimonialController = new TestimonialController();
 const themeController = new ThemeController();
+const userController = new UserController();
 const visitController = new VisitController();
 const welcomeController = new WelcomeController();
 
@@ -48,6 +50,16 @@ router.get('/testimonials', HandleErrors(testimonialController.getTestimonials))
 // Themes
 
 router.get('/theme', HandleErrors(themeController.getTheme));
+
+// Users
+
+router.post('/user/reset-password', HandleErrors(userController.initiatePasswordReset));
+
+router.post('/user/reset-password/token', HandleErrors(userController.completePasswordReset));
+
+router.get('/user/reset-password-token/verify/:token', HandleErrors(userController.verifyUserResetPasswordToken));
+
+router.patch('/user/update-password', TokenVerifier, HandleErrors(userController.updateAccountPassword));
 
 // Visits
 
