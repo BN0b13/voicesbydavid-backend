@@ -6,13 +6,14 @@ import {
 
 import { sequelize } from '../db.js';
 
-class WelcomeImage extends Model {
+class SectionImage extends Model {
   
   static associate(models) {
     
   }
 }
-WelcomeImage.init({
+SectionImage.init({
+  sectionId: DataTypes.INTEGER,
   caption: DataTypes.STRING,
   filename: DataTypes.STRING,
   path: DataTypes.STRING,
@@ -21,7 +22,7 @@ WelcomeImage.init({
 }, {
   sequelize,
   schema: process.env.PG_SCHEMA_NAME,
-  modelName: 'WelcomeImage',
+  modelName: 'SectionImage',
 });
   
-export default WelcomeImage;
+export default SectionImage;

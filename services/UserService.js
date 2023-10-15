@@ -1,10 +1,10 @@
 import * as bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
+import { User } from '../models/Associations.js';
+
 import AuthManagement from '../services/AuthManagement.js';
 import EmailService from './EmailService.js';
-
-import { User } from '../models/Associations.js';
 
 import { passwordValidation } from '../tools/user.js';
 

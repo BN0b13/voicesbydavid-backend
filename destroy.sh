@@ -10,11 +10,23 @@ mkdir public
 
 cd public
 
-mkdir img video
+mkdir audio img video
+
+cd audio
+
+mkdir reels
+
+cd ..
 
 cd img
 
-mkdir categories icons products themes welcome
+mkdir categories sections testimonials themes
+
+cd ..
+
+cd video
+
+mkdir reels
 
 cd ..
 

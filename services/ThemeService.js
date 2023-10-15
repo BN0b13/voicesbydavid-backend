@@ -1,6 +1,6 @@
 import fs from 'fs';
 import { Op } from 'sequelize';
-import Theme from '../models/Theme.js';
+import { Theme } from '../models/Associations.js';
 
 export default class ThemeService {
 

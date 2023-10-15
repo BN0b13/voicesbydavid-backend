@@ -1,4 +1,4 @@
-import Role from '../models/Role.js';
+import { Role } from '../models/Associations.js';
 
 class RoleRepository {
 

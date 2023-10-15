@@ -1,6 +1,6 @@
 import fs from 'fs';
-import Testimonial from '../models/Testimonial.js';
 
+import { Testimonial } from '../models/Associations.js';
 
 class TestimonialRepository {
 

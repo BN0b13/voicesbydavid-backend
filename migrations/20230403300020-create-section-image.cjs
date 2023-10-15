@@ -5,35 +5,17 @@ module.exports = {
     await queryInterface.createSchema(process.env.PG_SCHEMA_NAME, {
       ifNotExists: true
     });
-    await queryInterface.createTable('Reels', {
+    await queryInterface.createTable('SectionImages', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      position: {
+      sectionId: {
         type: Sequelize.INTEGER
       },
-      reelDate: {
-        type: Sequelize.STRING
-      },
-      reelType: {
-        type: Sequelize.STRING
-      },
-      title: {
-        type: Sequelize.STRING
-      },
-      description: {
-        type: Sequelize.STRING
-      },
-      company: {
-        type: Sequelize.STRING
-      },
-      companyUrl: {
-        type: Sequelize.STRING
-      },
-      url: {
+      caption: {
         type: Sequelize.STRING
       },
       filename: {
@@ -42,8 +24,11 @@ module.exports = {
       path: {
         type: Sequelize.STRING
       },
-      active: {
-        type: Sequelize.BOOLEAN
+      link: {
+        type: Sequelize.STRING
+      },
+      position: {
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,
@@ -56,6 +41,6 @@ module.exports = {
     }, { schema: process.env.PG_SCHEMA_NAME });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Reels');
+    await queryInterface.dropTable('SectionImages');
   }
 };

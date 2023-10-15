@@ -12,6 +12,7 @@ import { sequelize } from '../db.js';
     }
   }
   Reel.init({
+    categoryId: DataTypes.INTEGER,
     position: DataTypes.INTEGER,
     reelType: DataTypes.STRING,
     reelDate: DataTypes.STRING,

@@ -7,49 +7,59 @@ import { dirname } from 'path';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const router = express.Router();
-const uploadAudio = multer({ dest: path.join(__dirname, '..', 'public', 'audio', 'reels')});
+const uploadAudio = multer({ dest: path.join(__dirname, '..', 'public', 'img', 'categories')});
+const uploadCategories = multer({ dest: path.join(__dirname, '..', 'public', 'audio', 'reels')});
+const uploadSections = multer({ dest: path.join(__dirname, '..', 'public', 'img', 'sections')});
 const uploadTestimonials = multer({ dest: path.join(__dirname, '..', 'public', 'img', 'testimonials')});
 const uploadThemes = multer({ dest: path.join(__dirname, '..', 'public', 'img', 'themes')});
 const uploadVideos = multer({ dest: path.join(__dirname, '..', 'public', 'video', 'reels')});
-const uploadWelcome = multer({ dest: path.join(__dirname, '..', 'public', 'img', 'welcome')});
 
 import { AdminTokenVerifier } from '../middleware/adminTokenVerifier.js';
 import { HandleErrors } from '../middleware/errorHandler.js';
 
+import CategoryController from '../controllers/CategoryController.js';
 import ConfigurationController from '../controllers/ConfigurationController.js';
 import MessageController from '../controllers/MessageController.js';
 import ReelController from '../controllers/ReelController.js';
 import RoleController from '../controllers/RoleController.js';
+import SectionController from '../controllers/SectionController.js';
 import TestimonialController from '../controllers/TestimonialController.js';
 import ThemeController from '../controllers/ThemeController.js';
 import UserController from '../controllers/UserController.js';
 import VisitController from '../controllers/VisitController.js';
-import WelcomeController from '../controllers/WelcomeController.js';
 
+const categoryController = new CategoryController();
 const configurationController = new ConfigurationController();
 const messageController = new MessageController();
 const reelController = new ReelController();
 const roleController = new RoleController();
+const sectionController = new SectionController();
 const testimonialController = new TestimonialController();
 const themeController = new ThemeController();
 const visitController = new VisitController();
 const userController = new UserController();
-const welcomeController = new WelcomeController();
 
-// Configuration
+// Categories
+
+router.get('/categories', AdminTokenVerifier, HandleErrors(categoryController.getCategoriesWithoutAssociations));
+
+router.post('/categories', AdminTokenVerifier, uploadCategories.array('files'), HandleErrors(categoryController.create));
+
+router.patch('/categories', AdminTokenVerifier, HandleErrors(categoryController.updateCategoryById));
+router.patch('/categories/images/thumbnail', AdminTokenVerifier, uploadCategories.array('files'), HandleErrors(categoryController.addThumbnail));
+
+router.delete('/categories', AdminTokenVerifier, HandleErrors(categoryController.deleteCategoryById));
+
+// Configurations
 
 router.get('/configuration', AdminTokenVerifier, HandleErrors(configurationController.getAdminConfiguration));
 
-// Contact
+// Contacts
 
 router.get('/contact', AdminTokenVerifier, HandleErrors(messageController.getMessages));
 router.get('/contact/:id', AdminTokenVerifier, HandleErrors(messageController.getMessageById));
 
 router.patch('/contact', AdminTokenVerifier, HandleErrors(messageController.updateMessage));
-
-// Login
-
-router.post('/login', HandleErrors(userController.adminLogin));
 
 // Reels
 
@@ -68,6 +78,17 @@ router.delete('/reels', AdminTokenVerifier, HandleErrors(reelController.deleteRe
 router.post('/roles', AdminTokenVerifier, HandleErrors(roleController.create));
 
 router.get('/roles', AdminTokenVerifier, HandleErrors(roleController.getRoles));
+
+// Sections
+
+router.post('/sections/images', AdminTokenVerifier, uploadSections.array('files'), HandleErrors(sectionController.postSectionImage));
+
+router.get('/sections', HandleErrors(sectionController.getSections));
+
+router.patch('/sections', AdminTokenVerifier, HandleErrors(sectionController.updateSection));
+router.patch('/sections/images', AdminTokenVerifier, HandleErrors(sectionController.updateSectionImageById));
+
+router.delete('/sections/images', AdminTokenVerifier, HandleErrors(sectionController.deleteSectionImages));
 
 // Testimonials
 
@@ -90,8 +111,9 @@ router.patch('/themes/colors', AdminTokenVerifier, HandleErrors(themeController.
 // Users
 
 router.post('/admin', AdminTokenVerifier, HandleErrors(userController.createAdmin));
-router.get('/admin', AdminTokenVerifier, HandleErrors(userController.getAdmin));
+router.post('/login', HandleErrors(userController.adminLogin));
 
+router.get('/admin', AdminTokenVerifier, HandleErrors(userController.getAdmin));
 router.get('/users', AdminTokenVerifier, HandleErrors(userController.getUsers));
 router.get('/user', AdminTokenVerifier, HandleErrors(userController.getUser));
 router.get('/user/:id', AdminTokenVerifier, HandleErrors(userController.getUserById));
@@ -105,14 +127,5 @@ router.delete('/users', AdminTokenVerifier, HandleErrors(userController.deleteUs
 // Visits
 
 router.get('/visits', AdminTokenVerifier, HandleErrors(visitController.getVisits));
-
-// Welcome
-
-router.post('/welcome/images', AdminTokenVerifier, uploadWelcome.array('files'), HandleErrors(welcomeController.postWelcomeImage));
-
-router.patch('/welcome/images', AdminTokenVerifier, HandleErrors(welcomeController.updateWelcomeImageById));
-
-router.delete('/welcome/images/:id', AdminTokenVerifier, HandleErrors(welcomeController.deleteWelcomeImageById));
-router.delete('/welcome/images', AdminTokenVerifier, HandleErrors(welcomeController.deleteImagesAndFilesById));
 
 export default router;

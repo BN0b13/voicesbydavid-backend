@@ -1,6 +1,6 @@
 import { Sequelize } from 'sequelize';
 
-import Visit from '../models/Visit.js';
+import { Visit } from '../models/Associations.js';
 
 class VisitRepository {
 

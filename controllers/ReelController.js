@@ -1,7 +1,5 @@
-import TestimonialRepository from '../repositories/TestimonialRepository.js';
 import ReelService from '../services/ReelService.js';
 
-const testimonialRepository = new TestimonialRepository();
 const reelService = new ReelService();
 
 class ReelController {

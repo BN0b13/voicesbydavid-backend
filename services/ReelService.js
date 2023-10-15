@@ -3,7 +3,7 @@ import Ffmpeg from 'fluent-ffmpeg';
 Ffmpeg.setFfmpegPath(ffmpegPath.path);
 import fs from 'fs';
 import { Op } from 'sequelize';
-import Reel from '../models/Reel.js';
+import { Reel } from '../models/Associations.js';
 
 export default class ReelService {
 

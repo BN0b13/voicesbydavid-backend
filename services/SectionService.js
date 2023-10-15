@@ -1,12 +1,14 @@
 import fs from 'fs';
 import { Op } from 'sequelize';
-import WelcomeImage from '../models/WelcomeImage.js';
 
-export default class WelcomeService {
+import { Section, SectionImage } from '../models/Associations.js';
 
-    async saveWelcomeImage(params) {
+export default class SectionService {
+
+    async saveSectionImage(params) {
         try {
             const {
+                sectionId,
                 caption,
                 link,
                 position,
@@ -14,27 +16,28 @@ export default class WelcomeService {
             } = params;
             
             const data = {
+                sectionId,
                 caption,
                 filename: image.filename,
-                path: `/img/welcome/${image.filename}`,
+                path: `/img/sections/${image.filename}`,
                 link,
                 position
             };
 
-            const res = await WelcomeImage.create(data);
+            const res = await SectionImage.create(data);
 
             return res;
         } catch(err) {
-            console.log('Save Welcome Image To Server Error: ', err);
-            throw Error('There was an error getting saving welcome image to server');
+            console.log('Save Section Image To Server Error: ', err);
+            throw Error('There was an error getting saving section image to server');
         }
     }
 
     // DELETE
 
-    async deleteImagesAndFilesById(ids) {
+    async deleteSectionImages(ids) {
         try {
-            const getImages = await WelcomeImage.findAndCountAll({
+            const getImages = await SectionImage.findAndCountAll({
                 where: {
                     id: {
                         [Op.in]: ids
@@ -64,7 +67,7 @@ export default class WelcomeService {
                  });
             }
 
-            const res = await WelcomeImage.destroy(
+            const res = await SectionImage.destroy(
                 {
                     where: {
                         id: {
@@ -76,11 +79,11 @@ export default class WelcomeService {
 
             return {
                 status: 200,
-                message: `Deleted ${res} Picture`
+                message: `Deleted ${res} Section Image`
             };
         } catch (err) {
-            console.log('GET Images Error: ', err);
-            throw Error('There was an error getting the images');
+            console.log('DELETE Section Image Error: ', err);
+            throw Error('There was an error deleting the section images');
         }
     }
 }

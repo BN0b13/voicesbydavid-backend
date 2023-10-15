@@ -1,4 +1,4 @@
-import Theme from '../models/Theme.js';
+import { Theme } from '../models/Associations.js';
 
 class ThemeRepository {
 

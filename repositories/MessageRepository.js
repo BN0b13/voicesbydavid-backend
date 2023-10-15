@@ -1,6 +1,6 @@
-import Message from '../models/Message.js';
+import { Message } from '../models/Associations.js';
 
-import ReCaptchaCheck from '../services/ReCaptcha.js';
+import ReCaptchaCheck from '../tools/ReCaptcha.js';
 
 class MessageRepository {
 
