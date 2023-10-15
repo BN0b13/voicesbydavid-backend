@@ -18,7 +18,7 @@ Section.init({
   titleOn: DataTypes.BOOLEAN,
   subtitle: DataTypes.STRING,
   subtitleOn: DataTypes.BOOLEAN,
-  paragraph: DataTypes.STRING,
+  paragraph: DataTypes.TEXT,
   paragraphOn: DataTypes.BOOLEAN,
   imagesOn: DataTypes.BOOLEAN,
   position: DataTypes.INTEGER

@@ -3,7 +3,7 @@ import Ffmpeg from 'fluent-ffmpeg';
 Ffmpeg.setFfmpegPath(ffmpegPath.path);
 import fs from 'fs';
 import { Op } from 'sequelize';
-import { Reel } from '../models/Associations.js';
+import { Category, Reel } from '../models/Associations.js';
 
 export default class ReelService {
 
@@ -47,7 +47,13 @@ export default class ReelService {
 
     async getReels() {
         try {
-            const res = await Reel.findAndCountAll();
+            const res = await Reel.findAndCountAll({
+                include: [
+                    { 
+                        model: Category
+                    }
+                ]
+            });
             return res;
         } catch (err) {
             console.log('Get Reels Error: ', err);
@@ -75,7 +81,12 @@ export default class ReelService {
                 {
                     where: {
                         id:id
-                    }
+                    },
+                    include: [
+                        { 
+                            model: Category
+                        }
+                    ]
                 }
             );
             return res;

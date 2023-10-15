@@ -41,8 +41,6 @@ const userController = new UserController();
 
 // Categories
 
-router.get('/categories', AdminTokenVerifier, HandleErrors(categoryController.getCategoriesWithoutAssociations));
-
 router.post('/categories', AdminTokenVerifier, uploadCategories.array('files'), HandleErrors(categoryController.create));
 
 router.patch('/categories', AdminTokenVerifier, HandleErrors(categoryController.updateCategoryById));

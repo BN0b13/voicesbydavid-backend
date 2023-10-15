@@ -9,7 +9,8 @@ class ReelController {
     async createVideo(req, res) {
         try {
             const {
-                position = null,
+                categoryId = null,
+                position = 0,
                 reelDate = null,
                 title = null,
                 description = null,
@@ -18,6 +19,7 @@ class ReelController {
             } = req.body;
 
             const requiredParams = {
+                categoryId,
                 reelType: 'video',
                 title
             };
@@ -57,7 +59,8 @@ class ReelController {
     async createYoutubeReel(req, res) {
         try {
             const {
-                position = null,
+                categoryId = null,
+                position = 0,
                 reelDate = null,
                 title = null,
                 description = null,
@@ -67,6 +70,7 @@ class ReelController {
             } = req.body;
 
             const requiredParams = {
+                categoryId,
                 reelType: 'youtube',
                 title,
                 url: `<${url}>`
@@ -154,6 +158,7 @@ class ReelController {
     async updateYoutubeReel(req, res) {
         const {
             id,
+            categoryId = null,
             position = null,
             description = null,
             title = null,
@@ -164,6 +169,7 @@ class ReelController {
         } = req.body;
 
         const params = {
+            categoryId,
             position,
             description,
             title,

@@ -3,6 +3,7 @@ const router = express.Router();
 
 import { HandleErrors } from '../middleware/errorHandler.js';
 
+import CategoryController from '../controllers/CategoryController.js';
 import ConfigurationController from '../controllers/ConfigurationController.js';
 import MessageController from '../controllers/MessageController.js';
 import ReelController from '../controllers/ReelController.js';
@@ -12,6 +13,7 @@ import ThemeController from '../controllers/ThemeController.js';
 import UserController from '../controllers/UserController.js';
 import VisitController from '../controllers/VisitController.js';
 
+const categoryController = new CategoryController();
 const configurationController = new ConfigurationController();
 const messageController = new MessageController();
 const reelController = new ReelController();
@@ -27,6 +29,10 @@ router.get('/health', (req, res) => {
     message: 'API is healthy and responding'
   });
 });
+
+// Categories
+
+router.get('/categories', HandleErrors(categoryController.getCategoriesWithoutAssociations));
 
 // Configurations
 
