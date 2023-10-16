@@ -21,7 +21,7 @@ module.exports = {
       updatedAt: new Date()
     },
     {
-      name: 'Video Games',
+      name: 'Audio Books',
       description: ``,
       type: '',
       thumbnailPath: '',

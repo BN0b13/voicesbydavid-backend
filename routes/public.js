@@ -32,11 +32,11 @@ router.get('/health', (req, res) => {
 
 // Categories
 
-router.get('/categories', HandleErrors(categoryController.getCategoriesWithoutAssociations));
+router.get('/categories', HandleErrors(categoryController.getCategories));
 
 // Configurations
 
-router.get('/configuration', HandleErrors(configurationController.getPublicConfiguration));
+router.get('/configuration/social-media', HandleErrors(configurationController.getPublicConfigurationSocialMedia));
 
 // Contacts
 

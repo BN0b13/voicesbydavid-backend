@@ -1,4 +1,4 @@
-import { Category } from '../models/Associations.js';
+import { Category, Reel } from '../models/Associations.js';
 
 class CategoryRepository {
 
@@ -42,7 +42,7 @@ class CategoryRepository {
             const res = await Category.findAndCountAll({
                 include: [
                     {
-                        model: Product
+                        model: Reel
                     }
                 ]
             });
@@ -74,7 +74,7 @@ class CategoryRepository {
                 },
                 include: [
                     {
-                        model: Product
+                        model: Reel
                     }
                 ]
             });

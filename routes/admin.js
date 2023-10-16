@@ -51,6 +51,9 @@ router.delete('/categories', AdminTokenVerifier, HandleErrors(categoryController
 // Configurations
 
 router.get('/configuration', AdminTokenVerifier, HandleErrors(configurationController.getAdminConfiguration));
+router.get('/configuration/public', AdminTokenVerifier, HandleErrors(configurationController.getPublicConfiguration));
+
+router.patch('/configuration/public/social-media', AdminTokenVerifier, HandleErrors(configurationController.updatePublicSocialMedia));
 
 // Contacts
 

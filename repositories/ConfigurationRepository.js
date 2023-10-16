@@ -57,9 +57,44 @@ class ConfigurationRepository {
                 ]
             });
 
-            console.log('Public Configuration: ', res);
-
             const data = res;
+
+            return data;
+        } catch (err) {
+            console.log('Get Public Configuration Error: ', err);
+            throw Error('There was an error getting categories');
+        }
+    }
+
+    async getPublicConfigurationSocialMedia() {
+        try {
+            const res = await Configuration.findAndCountAll({
+                where: {
+                    name: 'public'
+                },
+                include: [
+                    { 
+                        model: Theme,
+                        required: true
+                    }
+                ]
+            });
+
+            
+            const socialMedias = res.rows[0].options.socialMedia;
+
+            const data = {};
+
+            for(let social in socialMedias) {
+                if(socialMedias[social].active) {
+                    data[social] = socialMedias[social];
+                }
+                if(!socialMedias[social].active) {
+                    data[social] = {
+                        url: socialMedias[social].active
+                    }
+                }
+            }
 
             return data;
         } catch (err) {
@@ -70,14 +105,33 @@ class ConfigurationRepository {
 
     // UPDATE
 
-    async updateCategory(id, data) {
+    async updatePublicSocialMedia(data) {
         try {
+            const getRes = await Configuration.findAndCountAll({
+                where: {
+                    name: 'public'
+                },
+                include: [
+                    { 
+                        model: Theme,
+                        required: true
+                    }
+                ]
+            });
+
+            const previousOptions = getRes.rows[0].options;
+
             const res = await Configuration.update(
-                data,
+                {
+                    options: {
+                        ...previousOptions,
+                        ...data
+                    }
+                },
                 {
                     where: {
-                                id: id
-                            }
+                        name: 'public'
+                    }
                 }
             );
             return res;

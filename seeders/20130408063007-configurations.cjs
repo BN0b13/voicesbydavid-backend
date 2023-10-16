@@ -9,6 +9,7 @@ module.exports = {
       name: 'public',
       url: 'voicesbydavid.com',
       company: JSON.stringify({
+        active: false,
         companyName: 'Voices By David',
         companyPhoneOn: false,
         companyPhone: null,
@@ -37,20 +38,23 @@ module.exports = {
         },
       }),
       options: JSON.stringify({
-        customerService: {
-          customerServiceOn: false,
-          customerServicePhone: null,
-          customerServicePhoneExt: null,
-          customerServiceEmail: 'davidilchertva@gmail.com'
-        },
-        deliveryInsurance: {
-          deliveryInsuranceOn: true,
-          deliveryInsuranceAmount: 999,
-          deliveryInsuranceDescription: ''
-        },
-        ageVerify: {
-          ageVerifyOn: true,
-          ageVerifyAgeLimit: 21
+        socialMedia: {
+          facebook: {
+            url: '',
+            active: false
+          },
+          instagram: {
+            url: '',
+            active: false
+          },
+          twitter: {
+            url: '',
+            active: false
+          },
+          youtube: {
+            url: '',
+            active: false
+          }
         }
       }),
       alerts: JSON.stringify({}),
