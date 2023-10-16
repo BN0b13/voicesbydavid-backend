@@ -167,20 +167,18 @@ class TestimonialRepository {
         }
     }
 
-    async deleteTestimonialImage(ids) {
+    async deleteTestimonialImage(id) {
         try {
             const getImages = await Testimonial.findAndCountAll({
                 where: {
-                    id: {
-                        [Op.in]: ids
-                    }
+                    id
                 }
             });
             
-            if(getImages.rows.length !== ids.length) {
+            if(getImages.rows.length === 0) {
                 return {
                     status: 404,
-                    message: 'Images(s) not found'
+                    message: 'Testimonial not found'
                 }
             }
             
@@ -206,7 +204,7 @@ class TestimonialRepository {
                 },
                 {
                     where: {
-                                id: id
+                                id
                             }
                 }
             );

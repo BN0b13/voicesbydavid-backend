@@ -100,6 +100,7 @@ router.get('/testimonials/:id', AdminTokenVerifier, HandleErrors(testimonialCont
 router.patch('/testimonials', AdminTokenVerifier, uploadTestimonials.array("files"), HandleErrors(testimonialController.updateTestimonial));
 
 router.delete('/testimonials', AdminTokenVerifier, HandleErrors(testimonialController.deleteTestimonialById));
+router.delete('/testimonials/image', AdminTokenVerifier, HandleErrors(testimonialController.deleteTestimonialImage));
 
 // Themes
 

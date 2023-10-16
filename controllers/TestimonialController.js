@@ -124,8 +124,8 @@ class TestimonialController {
     }
 
     async deleteTestimonialImage(req, res) {
-        const { ids } = req.body;
-        const data = await welcomeService.deleteTestimonialImage(ids);
+        const { id } = req.body;
+        const data = await testimonialRepository.deleteTestimonialImage(id);
         res.send(data);
     }
 }
