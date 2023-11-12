@@ -20,4 +20,32 @@ export default class EmailTemplates {
             `
         }
     }
+
+    messageReceivedTemplate = ({ firstName, lastName, phone, email, message }) => {
+        return {
+            sellerEmail: companySupportEmail,
+            emailSubject: `${companyName} Message Received`,
+            emailBody: `Hello! You have received a message!
+            Name: ${firstName} ${lastName} 
+            Phone: ${phone} 
+            Email: ${email} 
+            Message: ${message} 
+            https://admin.voicesbydavid.com/messages`,
+            html: `
+                <div style='text-align:center;'>
+                    <h1>${companyName}</h1>
+                    <p>Hello! You have received a message!</p>
+                    <p>Name: ${firstName} ${lastName}</p>
+                    <p>Phone: ${phone}</p>
+                    <p>Email: ${email}</p>
+                    <p>Message: ${message}</p>
+                    <button style='border-radius:5px;'>
+                        <a href='https://admin.voicesbydavid.com/messages' style='text-decoration:none;border-radius:5px;padding:5px;'>
+                            Messages
+                        </a>
+                    </button>
+                </div>
+            `
+        }
+    }
 }

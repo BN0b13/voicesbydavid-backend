@@ -1,6 +1,9 @@
 import { Message } from '../models/Associations.js';
+import EmailService from '../services/EmailService.js';
 
 import ReCaptchaCheck from '../tools/ReCaptcha.js';
+
+const emailService = new EmailService();
 
 class MessageRepository {
 
@@ -26,6 +29,15 @@ class MessageRepository {
 
         try {
             const res = await Message.create(data);
+
+            await emailService.messageReceived({ 
+                firstName: params.firstName, 
+                lastName: params.lastName, 
+                phone: params.phone, 
+                email: params.email, 
+                message: params.message 
+            });
+
             return {
                 status: 201,
                 message: 'Message created.',
