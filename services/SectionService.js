@@ -2,6 +2,7 @@ import fs from 'fs';
 import { Op } from 'sequelize';
 
 import { Section, SectionImage } from '../models/Associations.js';
+import { compressImage } from '../tools/images.js';
 
 export default class SectionService {
 
@@ -23,6 +24,10 @@ export default class SectionService {
                 link,
                 position
             };
+
+            const { path, filename } = image;
+            await compressImage(path, `sections/${filename}`);
+            
 
             const res = await SectionImage.create(data);
 
@@ -61,6 +66,16 @@ export default class SectionService {
                     }
                  
                     fs.unlink(`./public${imagePath}`,function(err){
+                         if(err) return console.log(err);
+                         console.log('file deleted successfully');
+                    });
+                 });
+                fs.stat(`./public${imagePath}-mobile.webp`, function (err) {
+                    if (err) {
+                        return console.error(err);
+                    }
+                 
+                    fs.unlink(`./public${imagePath}-mobile.webp`,function(err){
                          if(err) return console.log(err);
                          console.log('file deleted successfully');
                     });

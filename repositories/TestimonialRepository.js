@@ -1,6 +1,7 @@
 import fs from 'fs';
 
 import { Testimonial } from '../models/Associations.js';
+import { compressImage } from '../tools/images.js';
 
 class TestimonialRepository {
 
@@ -37,6 +38,8 @@ class TestimonialRepository {
             Object.keys(data).forEach(param => data[param] == null && delete data[param]);
 
             if(image !== null) {
+                const { path, filename } = image;
+            await compressImage(path, `testimonials/${filename}`);
                 data.filename = image.filename;
                 data.path = `/img/testimonials/${image.filename}`;
             }
@@ -148,6 +151,16 @@ class TestimonialRepository {
                         console.log('file deleted successfully');
                     });
                 });
+                fs.stat(`./public${imagePath}-mobile.webp`, function (err) {
+                    if (err) {
+                        return console.error(err);
+                    }
+                
+                    fs.unlink(`./public${imagePath}-mobile.webp`,function(err){
+                        if(err) return console.log('There was an error deleting testimonial image: ', err);
+                        console.log('file deleted successfully');
+                    });
+                });
             }
 
             const res = await Testimonial.destroy(
@@ -191,6 +204,16 @@ class TestimonialRepository {
                     }
                  
                     fs.unlink(`./public${imagePath}`,function(err){
+                         if(err) return console.log(err);
+                         console.log('file deleted successfully');
+                    });
+                 });
+                fs.stat(`./public${imagePath}-mobile.webp`, function (err) {
+                    if (err) {
+                        return console.error(err);
+                    }
+                 
+                    fs.unlink(`./public${imagePath}-mobile.webp`,function(err){
                          if(err) return console.log(err);
                          console.log('file deleted successfully');
                     });
