@@ -50,11 +50,9 @@ function execPromise(command) {
 
 async function updateSSL() {
   const expiryDate = await getSSLExpiryDate();
+  const ONE_DAY_MS = 24 * 60 * 60 * 1000;
 
-  console.log('Formatted expiration date for SSL:', expiryDate);
-  console.log('If statement check:', expiryDate && new Date() > expiryDate);
-
-  if (expiryDate && new Date() > expiryDate) {
+  if (expiryDate && new Date() > new Date(expiryDate.getTime() - ONE_DAY_MS)) {
     console.log('SSL certificate is expired. Renewing now...');
 
     try {

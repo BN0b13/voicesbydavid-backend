@@ -1,8 +1,6 @@
 import cron from 'node-cron';
 import { exec } from 'child_process';
 
-const ONE_DAY_MS = 24 * 60 * 60 * 1000; // 1 day in milliseconds
-
 class Cron {
     backup() {
         cron.schedule('0 0 0 * * *', () => {
@@ -18,16 +16,15 @@ class Cron {
         });
     }
 
-    async updateSSL() {
-        const expiryDate = await getSSLExpiryDate();
-      
-        if (expiryDate && new Date() > new Date(expiryDate.getTime() - ONE_DAY_MS)) {
-          console.log('SSL certificate will expire soon. Renewing now...');
-          // Continue with the certificate renewal process
-        } else {
-          console.log('SSL certificate is still valid for more than a day.');
-        }
-    }
+    sslRenewal() {
+        cron.schedule('0 0 * * *', () => {
+          console.log('Checking SSL certificate status...', new Date());
+          exec('node /path/to/porkbun_ssl.cjs', (error, stdout, stderr) => {
+            console.log(stdout, stderr);
+            if (error) console.log(`exec error: ${error}`);
+          });
+        });
+      }
 }
 
 export default Cron;

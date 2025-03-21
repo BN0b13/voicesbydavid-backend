@@ -16,7 +16,7 @@ const __dirname = dirname(__filename);
 const cron = new Cron();
 
 cron.backup();
-cron.updateSSL();
+cron.sslRenewal();
 
 const app = express();
 const port = process.env.PORT;
