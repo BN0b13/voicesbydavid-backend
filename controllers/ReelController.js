@@ -6,6 +6,56 @@ class ReelController {
 
     // CREATE
 
+    async createAudio(req, res) {
+        try {
+            const {
+                categoryId = null,
+                position = 0,
+                reelDate = null,
+                title = null,
+                description = null,
+                company = null,
+                companyUrl = null,
+            } = req.body;
+
+            const requiredParams = {
+                categoryId,
+                reelType: 'audio',
+                title
+            };
+
+            Object.values(requiredParams).forEach(param => {
+                if(param === null) {
+                    throw Error(`Missing ${requiredParams[param]} Param`);
+                }
+            });
+
+            const optionalParams = {
+                position,
+                reelDate,
+                description,
+                company,
+                companyUrl
+            }
+
+            const params = {
+                ...requiredParams,
+                ...optionalParams
+            }
+
+            const audio = req.files[0];
+
+            const data = await reelService.createAudioReel(params, audio);
+
+            res.send(data);
+        } catch (err) {
+            res.send({
+                err,
+                message: 'There was an error creating the Audio Reel'
+            });
+        }
+    }
+
     async createVideo(req, res) {
         try {
             const {
@@ -119,32 +169,13 @@ class ReelController {
         res.send(data);
     }
 
-    // GET Video Reels
-    
-    async getVideoReels(req, res) {
-        const data = await reelService.getVideoReels();
-        res.send(data);
+    async getAudioReelByFilename(req, res) {
+        await reelService.getAudioReelByFilename(req, res);
     }
 
-    async getVideoReelById(req, res) {
-        const { id } = req.params;
-        const data = await reelService.getVideoReelById(id);
-        res.send(data);
+    async getVideoReelByFilename(req, res) {
+        await reelService.getVideoReelByFilename(req, res);
     }
-
-    
-    async streamVideoById(req, res) {
-        const { id } = req.params;
-        // const range = req.headers.range;
-        // if (!range) {
-        //     return res.status(400).send("Requires Range header");
-        // }
-        const data = await reelService.streamVideoById(res, id);
-
-        return data;
-    }
-
-    // GET Audio Reels
 
     // PATCH
 
@@ -155,7 +186,7 @@ class ReelController {
         res.send(data);
     }
 
-    async updateYoutubeReel(req, res) {
+    async updateReel(req, res) {
         const {
             id,
             categoryId = null,
@@ -181,7 +212,7 @@ class ReelController {
 
         Object.keys(params).forEach(param => params[param] == null && delete params[param]);
 
-        const data = await reelService.updateYoutubeReel(id, params);
+        const data = await reelService.updateReel(id, params);
         res.send(data);
     }
 

@@ -45,8 +45,8 @@ router.post('/contact', HandleErrors(messageController.create));
 // Reels
 
 router.get('/reels', HandleErrors(reelController.getReels));
-router.get('/reels/video', HandleErrors(reelController.getVideoReels));
-router.get('/reels/video/:id', HandleErrors(reelController.streamVideoById));
+router.get('/reels/audio/:filename', HandleErrors(reelController.getAudioReelByFilename));
+router.get('/reels/video/:filename', HandleErrors(reelController.getVideoReelByFilename));
 
 // Sections
 

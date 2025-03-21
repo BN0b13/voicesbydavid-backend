@@ -16,13 +16,13 @@ const __dirname = dirname(__filename);
 const cron = new Cron();
 
 cron.backup();
+cron.updateSSL();
 
 const app = express();
 const port = process.env.PORT;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(__dirname + '/public'));
 app.use(
   helmet({
     contentSecurityPolicy: false,
@@ -33,13 +33,14 @@ app.use(
 
 //Prod
 // app.use(cors({
-//   origin: ['https://voicesbydavid.com', 'https://www.voicesbydavid.com', 'https://admin.voicesbydavid.com']
-// }));
-
+  //   origin: ['https://voicesbydavid.com', 'https://www.voicesbydavid.com', 'https://admin.voicesbydavid.com']
+  // }));
+  
 app.use(cors({ origin: '*' }));
 
 app.disable('x-powered-by');
-
+  
+app.use(express.static(__dirname + '/public', { acceptRanges: true }));
 app.use('/', routes);
 
 app.listen(port, () => console.log(`Voices By David Backend listening on port ${port}.`));

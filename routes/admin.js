@@ -7,8 +7,8 @@ import { dirname } from 'path';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const router = express.Router();
-const uploadAudio = multer({ dest: path.join(__dirname, '..', 'public', 'img', 'categories')});
-const uploadCategories = multer({ dest: path.join(__dirname, '..', 'public', 'audio', 'reels')});
+const uploadAudio = multer({ dest: path.join(__dirname, '..', 'public', 'audio', 'reels')});
+const uploadCategories = multer({ dest: path.join(__dirname, '..', 'public', 'img', 'categories')});
 const uploadSections = multer({ dest: path.join(__dirname, '..', 'public', 'img', 'sections')});
 const uploadTestimonials = multer({ dest: path.join(__dirname, '..', 'public', 'img', 'testimonials')});
 const uploadThemes = multer({ dest: path.join(__dirname, '..', 'public', 'img', 'themes')});
@@ -64,13 +64,15 @@ router.patch('/contact', AdminTokenVerifier, HandleErrors(messageController.upda
 
 // Reels
 
+router.post('/reels/audio', AdminTokenVerifier, uploadAudio.array("files"), HandleErrors(reelController.createAudio));
 router.post('/reels/video', AdminTokenVerifier, uploadVideos.array("files"), HandleErrors(reelController.createVideo));
 router.post('/reels/youtube', AdminTokenVerifier, HandleErrors(reelController.createYoutubeReel));
 
-router.get('/reels/all/:id', AdminTokenVerifier, HandleErrors(reelController.getReelById));
+router.get('/reels/', AdminTokenVerifier, HandleErrors(reelController.getReels));
+router.get('/reels/:id', AdminTokenVerifier, HandleErrors(reelController.getReelById));
 
 router.patch('/reels/activate', AdminTokenVerifier, HandleErrors(reelController.activateReel));
-router.patch('/reels/youtube', AdminTokenVerifier, HandleErrors(reelController.updateYoutubeReel));
+router.patch('/reels', AdminTokenVerifier, HandleErrors(reelController.updateReel));
 
 router.delete('/reels', AdminTokenVerifier, HandleErrors(reelController.deleteReelById));
 
