@@ -19,12 +19,12 @@ class Cron {
     sslRenewal() {
         cron.schedule('0 0 * * *', () => {
           console.log('Checking SSL certificate status...', new Date());
-          exec('node /path/to/porkbun_ssl.cjs', (error, stdout, stderr) => {
+          exec('node ../porkbun_ssl.cjs', (error, stdout, stderr) => {
             console.log(stdout, stderr);
             if (error) console.log(`exec error: ${error}`);
           });
         });
-      }
+    }
 }
 
 export default Cron;
